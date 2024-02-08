@@ -1,0 +1,18 @@
+# use images from rocker
+FROM rocker/r-ver
+
+# set R version
+ENV R_VER=4.3.2
+
+# install ubuntu packages 
+RUN apt-get update && \
+    apt-get install -y bash 
+
+# install R packages
+RUN Rscript -e "install.packages(c('BiocManager', 'devtools', 'remotes', 'curl', 'openssl', 'igraph', 'leiden', 'hdf5r', 'httr', 'plotly', 'circlize', 'ggalluvial', 'ggbeeswarm', 'ggpubr', 'ggrepel', 'grid', 'harmony', 'httpgd', 'jsonlite', 'languageserver', 'Matrix', 'patchwork', 'RColorBrewer', 'reticulate', 'RSQLite', 'rstatix', 'scales', 'Seurat', 'SeuratObject', 'Signac', 'SoupX', 'tidyverse', 'UpSetR'), dependencies = TRUE)"
+RUN Rscript -e "BiocManager::install(c('BiocParallel', 'BSgenome.Hsapiens.UCSC.hg38', 'chromVAR', 'ComplexHeatmap', 'DESeq2', 'EnsDb.Hsapiens.v86', 'HCATonsilData', 'JASPAR2024', 'limma', 'TFBSTools'))" 
+RUN Rscript -e "remotes::install_github('satijalab/azimuth', ref = 'master')"
+RUN Rscript -e "remotes::install_github('chris-mcginnis-ucsf/DoubletFinder')"
+RUN Rscript -e "remotes::install_github('mojaveazure/seurat-disk')"
+RUN Rscript -e "remotes::install_github('morinlab/GAMBLR.data')"
+RUN Rscript -e "remotes::install_github('massonix/SLOcatoR')"
