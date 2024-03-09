@@ -5,8 +5,8 @@ FROM rocker/rstudio
 ENV R_VER=4.3.2
 
 # install ubuntu packages 
-RUN apt-get update && \
-    apt-get install -y \
+RUN apt-get update
+RUN apt-get install -y \
     bash \
     patch \
     libmagick++-dev \
@@ -21,7 +21,8 @@ RUN apt-get update && \
     libglpk40 \
     libgit2-dev \
     libgsl27 \
-    libgsl-dev
+    libgsl-dev \
+    python3-pip
 
 # install R packages
 RUN Rscript -e "install.packages(c('BiocManager', 'devtools'))"
@@ -33,3 +34,9 @@ RUN Rscript -e "remotes::install_github('morinlab/GAMBLR.data')"
 RUN Rscript -e "remotes::install_github('massonix/SLOcatoR')"
 RUN Rscript -e "remotes::install_github('satijalab/azimuth', ref = 'master')"
 RUN Rscript -e "remotes::install_github('stuart-lab/signac', ref = 'develop')"
+
+# install python packages
+RUN pip install \
+    leidenalg \
+    numpy \
+    pandas

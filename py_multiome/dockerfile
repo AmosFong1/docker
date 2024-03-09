@@ -1,4 +1,12 @@
-# install ubuntu packages 
-RUN apt-get update && \
-    apt-get install -y \
-    bash \
+# use images from python
+FROM jupyter/scipy-notebook:x86_64-python-3.11
+
+# install python packages
+RUN pip install \
+    anndata==0.10.5 \
+    scanpy==1.9.8 \
+    pyranges==0.0.129 \
+    pybiomart==0.2.0 \
+    leidenalg \
+    louvain \
+    pyscenic
