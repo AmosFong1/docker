@@ -2,6 +2,7 @@
 
 IMAGE=/projects/dscott_prj/amfong/Multiome/r_multiome_4.3.2.sif
 HOME=/projects/dscott_prj/amfong/Multiome
+PORT=8030
 export PASSWORD='password'
 
 singularity exec \
@@ -15,5 +16,5 @@ singularity exec \
     ${IMAGE} rserver \
     --auth-none=0 \
     --auth-pam-helper-path=pam-helper \
-    --www-port=8030 \
+    --www-port=${PORT} \
     --server-user=${USER}

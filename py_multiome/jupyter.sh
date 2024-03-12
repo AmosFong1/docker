@@ -2,6 +2,7 @@
 
 IMAGE=/projects/dscott_prj/amfong/Multiome/py_multiome_3.11.sif
 HOME=/projects/dscott_prj/amfong/Multiome
+PORT=9079
 export SINGULARITYENV_JUPYTER_TOKEN='password'
 
 singularity exec \
@@ -11,6 +12,6 @@ singularity exec \
     --bind=/projects/dscott_prj/amfong \
     --bind=/projects/dscott_scratch/amfong \
     ${IMAGE} jupyter lab \
-    --port=9079 \
+    --port=${PORT} \
     --no-browser \
     --notebook-dir=${HOME}
