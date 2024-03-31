@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMAGE=/projects/dscott_prj/amfong/Multiome/r_multiome_4.3.2.sif
+IMAGE=/projects/dscott_prj/amfong/Multiome/r_multiome_4.3.3.sif
 HOME=/projects/dscott_prj/amfong/Multiome
 PORT=8030
 export PASSWORD='password'
@@ -10,7 +10,6 @@ singularity exec \
     --bind=$TMPDIR:/var/lib/rstudio-server \
     --home=${HOME} \
     --bind=/home/amfong \
-    --bind=/projects/clc/clc_scratch/projects/yyin \
     --bind=/projects/dscott_prj/amfong \
     --bind=/projects/dscott_scratch/amfong \
     ${IMAGE} rserver \

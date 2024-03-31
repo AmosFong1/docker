@@ -1,8 +1,8 @@
 #!/bin/bash
 
-IMAGE=/projects/dscott_prj/amfong/Multiome/py_multiome_3.11.sif
+IMAGE=/projects/dscott_prj/amfong/Multiome/py_multiome_3.10.sif
 HOME=/projects/dscott_prj/amfong/Multiome
-PORT=9079
+PORT=8030
 export SINGULARITYENV_JUPYTER_TOKEN='password'
 
 singularity exec \

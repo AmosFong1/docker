@@ -1,5 +1,5 @@
 # use images from jupyter
-FROM jupyter/datascience-notebook:python-3.11
+FROM jupyter/datascience-notebook:4d70cf8da953
 
 # set user
 USER root
@@ -22,8 +22,9 @@ RUN apt-get update && \
     libglpk40 \
     libgit2-dev \
     libgsl-dev \
-    libxml2-dev \
-    libxslt1-dev
+    jags \
+    libgsl27 && \
+    rm -rf /var/lib/apt/lists/*
     
 # install python packages
 RUN pip install anndata
@@ -31,14 +32,6 @@ RUN pip install scanpy
 RUN pip install pyranges
 RUN pip install pybiomart
 RUN pip install leidenalg
-RUN pip install muon
-RUN pip install pysam
-RUN pip install numpy==1.23.5
 RUN pip install pyscenic
-RUN pip install MACS2
-
-# install python packages
-RUN pip install llvmlite --ignore-installed
-RUN git clone https://github.com/aertslab/scenicplus && \
-    cd scenicplus && \
-    pip install -e .
+RUN pip install anndata2ri
+RUN pip install numpy==1.23.5  --ignore-installed
