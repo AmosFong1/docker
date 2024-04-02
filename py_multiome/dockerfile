@@ -1,5 +1,5 @@
 # use images from jupyter
-FROM jupyter/datascience-notebook:python-3.11
+FROM jupyter/scipy-notebook:4d70cf8da953
 
 # set user
 USER root

@@ -1,8 +1,5 @@
 # use images from rocker
-FROM rocker/rstudio
-
-# set R version
-ENV R_VER=4.3.3
+FROM rocker/rstudio:4.3.2
 
 # install ubuntu packages 
 RUN apt-get update && \
@@ -54,4 +51,4 @@ RUN /home/rstudio/venv/bin/pip3 install leidenalg
 RUN pip install MACS2
 RUN pip install numpy
 RUN pip install Cython
-RUN chmod -R 755 /usr/local/lib/python3.10/dist-packages/MACS2
+RUN chmod -R 777 /usr/local/lib/python3.10/dist-packages/MACS2
