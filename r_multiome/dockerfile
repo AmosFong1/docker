@@ -1,5 +1,5 @@
 # use images from rocker
-FROM rocker/rstudio:4.3.2
+FROM rocker/ml:4.3.2
 
 # install ubuntu packages 
 RUN apt-get update && \
@@ -20,19 +20,31 @@ RUN apt-get update && \
     libgsl27 \
     libgsl-dev
 
-# install R packages
+# install R packages from cran
 RUN Rscript -e "install.packages(c('BiocManager', 'devtools'))"
-RUN Rscript -e "install.packages(c('remotes', 'curl', 'RCurl', 'magick', 'openssl', 'igraph', 'leiden', 'httr', 'plotly', 'circlize', 'ggalluvial', 'ggbeeswarm', 'ggpubr', 'ggrepel', 'harmony', 'jsonlite', 'languageserver', 'Matrix', 'patchwork', 'RColorBrewer', 'reticulate', 'RSQLite', 'rstatix', 'scales', 'Seurat', 'SeuratObject', 'Signac', 'SoupX', 'UpSetR', 'tidyverse', 'hdf5r', 'fastTopics'), dependencies = TRUE)"
-RUN Rscript -e "BiocManager::install(c('BiocParallel', 'BSgenome.Hsapiens.UCSC.hg38', 'chromVAR', 'ComplexHeatmap', 'DESeq2', 'EnsDb.Hsapiens.v86', 'HCATonsilData', 'JASPAR2024', 'limma', 'JASPAR2020', 'biovizBase', 'TFBSTools', 'edgeR', 'scater', 'SingleR', 'scDblFinder'))" 
+RUN Rscript -e "install.packages(c('remotes', 'curl', 'RCurl', 'magick', 'openssl', 'igraph', 'leiden', 'httr', 'plotly', 'circlize', 'ggalluvial', 'ggbeeswarm', 'ggpubr', 'ggrepel', 'harmony', 'jsonlite', 'languageserver', 'Matrix', 'patchwork', 'RColorBrewer', 'reticulate', 'RSQLite', 'rstatix', 'scales', 'Seurat', 'SeuratObject', 'SoupX', 'UpSetR', 'tidyverse', 'hdf5r', 'fastTopics'), dependencies = TRUE)"
+RUN Rscript -e "install.packages(c('Matrix'))"
+
+# install R packages from bioconductor
+RUN Rscript -e "BiocManager::install(c('BiocParallel', 'BSgenome.Hsapiens.UCSC.hg38', 'chromVAR', 'ComplexHeatmap', 'DESeq2', 'EnsDb.Hsapiens.v86', 'HCATonsilData', 'limma', 'biovizBase', 'TFBSTools', 'edgeR', 'scater', 'scDblFinder', 'batchelor'))" 
+
+# install R packages from github
 RUN Rscript -e "remotes::install_github('mojaveazure/seurat-disk')"
 RUN Rscript -e "remotes::install_github('morinlab/GAMBLR.data')"
 RUN Rscript -e "remotes::install_github('massonix/SLOcatoR')"
 RUN Rscript -e "remotes::install_github('satijalab/azimuth', ref = 'master')"
-RUN Rscript -e "remotes::install_github('stuart-lab/signac', ref = 'develop')"
+RUN Rscript -e "remotes::install_github('satijalab/seurat-wrappers')"
+RUN Rscript -e "remotes::install_github('cellgeni/sceasy')"
 
-# install R packages
+# install infercnv
 RUN apt-get install -y jags
 RUN Rscript -e "BiocManager::install(c('infercnv'))"
+
+# install archr
+RUN Rscript -e "remotes::install_github('GreenleafLab/ArchR', ref='master', repos = BiocManager::repositories())"
+RUN Rscript -e "library(ArchR)" \
+    "ArchR::installExtraPackages()"
+RUN Rscript -e "remotes::install_github('GreenleafLab/chromVARmotifs')"
 
 # create venv
 RUN apt-get install -y \
@@ -46,9 +58,18 @@ RUN chmod -R 755 /home/rstudio
 RUN /home/rstudio/venv/bin/pip3 install pandas
 RUN /home/rstudio/venv/bin/pip3 install numpy
 RUN /home/rstudio/venv/bin/pip3 install leidenalg
+RUN /home/rstudio/venv/bin/pip3 install scanorama==1.7.3
+RUN /home/rstudio/venv/bin/pip3 install annoy==1.17.1
+RUN /home/rstudio/venv/bin/pip3 install scanpy
 
-# install python packages
-RUN pip install MACS2
-RUN pip install numpy
-RUN pip install Cython
-RUN chmod -R 777 /usr/local/lib/python3.10/dist-packages/MACS2
+# install scvi-tools in venv
+RUN /home/rstudio/venv/bin/pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+RUN /home/rstudio/venv/bin/pip3 install -U "jax[cuda11_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+RUN /home/rstudio/venv/bin/pip3 install jaxlib
+RUN /home/rstudio/venv/bin/pip3 install scvi-tools
+
+# # install python packages globally
+# RUN pip install MACS2
+# RUN pip install numpy
+# RUN pip install Cython
+# RUN chmod -R 777 /opt/venv/lib/python3.10/site-packages/MACS2

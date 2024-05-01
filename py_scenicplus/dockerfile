@@ -1,0 +1,23 @@
+# use images from jupyter
+FROM jupyter/scipy-notebook:python-3.11
+
+# set user
+USER root
+
+# install ubuntu packages
+RUN apt-get update && \
+    apt-get install -y \
+    bash \
+    wget \
+    default-jdk \
+    openjdk-8-jdk
+
+# install python packages
+RUN git clone https://github.com/aertslab/scenicplus && \
+    cd scenicplus && \
+    pip install .
+
+# install mallet
+RUN wget https://github.com/mimno/Mallet/releases/download/v202108/Mallet-202108-bin.tar.gz && \
+    tar -xf Mallet-202108-bin.tar.gz
+RUN chmod -R 777 /home/jovyan
