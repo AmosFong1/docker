@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMAGE=/projects/dscott_prj/amfong/Multiome/r_multiome_4.3.2.sif
+IMAGE=/projects/dscott_prj/amfong/Multiome/r_multiome_4.3.0.sif
 HOME=/projects/dscott_prj/amfong/Multiome
 SCRIPT=/projects/dscott_prj/amfong/Multiome/scratch/rscript.R
 
