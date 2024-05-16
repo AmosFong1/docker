@@ -1,18 +1,18 @@
 # run on local
-docker buildx build --platform linux/amd64 -t amosfong1/r_multiome:4.3.0 .
+docker buildx build --platform linux/amd64 -t amosfong1/r_multiome:4.3.2 .
 
 # run on local
-docker push amosfong1/r_multiome:4.3.0
+docker push amosfong1/r_multiome:4.3.2
 
 # run on server
-singularity pull docker://amosfong1/r_multiome:4.3.0
+singularity pull docker://amosfong1/r_multiome:4.3.2
 
 # run on server
 sh rscript.sh
 sh rstudio.sh
 
 # run on local
-ssh -oHostKeyAlgorithms=+ssh-rsa -N -L 8030:gphost07.bcgsc.ca:8030 amfong@ssh.bcgsc.ca -v
+ssh -oHostKeyAlgorithms=+ssh-rsa -N -L 8030:gphost04.bcgsc.ca:8030 amfong@ssh.bcgsc.ca -v
 
 # enter in browser
 http://localhost:8030

@@ -1,9 +1,10 @@
 #!/bin/bash
 
-IMAGE=/projects/dscott_prj/amfong/Multiome/r_multiome_4.3.0.sif
-HOME=/projects/dscott_prj/amfong/Multiome
+IMAGE=/projects/dscott_prj/amfong/Multiome/images/r_multiome_4.3.2.sif
+HOME=/home/amfong
 PORT=8030
-export PASSWORD='password'
+export PASSWORD='famousamos'
+export TMPDIR=/home/amfong
 
 singularity exec \
     --bind=$TMPDIR:/var/run/ \
@@ -12,8 +13,11 @@ singularity exec \
     --bind=/home/amfong \
     --bind=/projects/dscott_prj/amfong \
     --bind=/projects/dscott_scratch/amfong \
-    ${IMAGE} rserver \
+    --bind=/tmp \
+    ${IMAGE} /usr/lib/rstudio-server/bin/rserver \
     --auth-none=0 \
     --auth-pam-helper-path=pam-helper \
     --www-port=${PORT} \
-    --server-user=${USER}
+    --server-user=${USER} \
+    --auth-timeout-minutes=0 \
+    --auth-stay-signed-in-days=30

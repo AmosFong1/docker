@@ -59,6 +59,7 @@ RUN Rscript -e "BiocManager::install('infercnv')"
 RUN Rscript -e "remotes::install_github('GreenleafLab/ArchR', ref='master', repos = BiocManager::repositories())"
 RUN Rscript -e "library(ArchR)" -e "ArchR::installExtraPackages()"
 RUN Rscript -e "remotes::install_github('GreenleafLab/chromVARmotifs')"
+RUN Rscript -e "install.packages('tidyverse')"
 
 # create venv
 RUN apt-get install -y \
@@ -66,7 +67,8 @@ RUN apt-get install -y \
     python3-venv \
     python3-pip
 RUN python3 -m venv /home/rstudio/venv
-RUN chmod -R 755 /home/rstudio
+RUN chmod -R 777 /home/rstudio
+ENV VIRTUAL_ENV=/home/rstudio/venv
 
 # install python packages in venv
 RUN /home/rstudio/venv/bin/pip3 install pandas
@@ -78,5 +80,6 @@ RUN /home/rstudio/venv/bin/pip3 install scvi-tools
 # install python packages globally
 RUN pip install MACS2
 
-# set environment variables
-ENV VIRTUAL_ENV=/home/rstudio/venv
+# set locale
+ENV LANG=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8

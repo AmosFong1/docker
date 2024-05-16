@@ -1,7 +1,7 @@
 #!/bin/bash
 
 IMAGE=/projects/dscott_prj/amfong/Multiome/images/py_scenicplus_3.11.sif
-HOME=/projects/dscott_prj/amfong/Multiome
+HOME=/home/amfong
 SCRIPT=/projects/dscott_prj/amfong/Multiome/scratch/python3.py
 
 singularity exec \
