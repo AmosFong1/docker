@@ -60,6 +60,7 @@ RUN Rscript -e "remotes::install_github('GreenleafLab/ArchR', ref='master', repo
 RUN Rscript -e "library(ArchR)" -e "ArchR::installExtraPackages()"
 RUN Rscript -e "remotes::install_github('GreenleafLab/chromVARmotifs')"
 RUN Rscript -e "install.packages('tidyverse')"
+RUN Rscript -e "install.packages('randomcoloR')"
 
 # create venv
 RUN apt-get install -y \
