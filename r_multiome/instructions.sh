@@ -9,7 +9,7 @@ singularity pull docker://amosfong1/r_multiome:4.3.2
 
 # run on server
 sh rscript.sh
-sh rstudio.sh
+sh rserver.sh
 
 # run on local
 ssh -oHostKeyAlgorithms=+ssh-rsa -N -L 8030:gphost04.bcgsc.ca:8030 amfong@ssh.bcgsc.ca -v
