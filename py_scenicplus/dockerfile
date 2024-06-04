@@ -21,3 +21,6 @@ RUN git clone https://github.com/aertslab/scenicplus && \
 RUN wget https://github.com/mimno/Mallet/releases/download/v202108/Mallet-202108-bin.tar.gz && \
     tar -xf Mallet-202108-bin.tar.gz
 RUN chmod -R 777 /home/jovyan
+
+# install python packages
+RUN pip install polars-lts-cpu
