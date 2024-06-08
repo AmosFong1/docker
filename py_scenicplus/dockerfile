@@ -12,15 +12,20 @@ RUN apt-get update && \
     default-jdk \
     openjdk-8-jdk
 
+# export snakemake environment variables
+ENV XDG_CACHE_HOME=/tmp
+
 # install python packages
 RUN git clone https://github.com/aertslab/scenicplus && \
     cd scenicplus && \
     pip install .
 
-# install mallet
+# install java packages
 RUN wget https://github.com/mimno/Mallet/releases/download/v202108/Mallet-202108-bin.tar.gz && \
     tar -xf Mallet-202108-bin.tar.gz
-RUN chmod -R 777 /home/jovyan
-
+    
 # install python packages
 RUN pip install polars-lts-cpu
+
+# give read-write privilages to /home/jovyan
+RUN chmod -R 777 /home/jovyan

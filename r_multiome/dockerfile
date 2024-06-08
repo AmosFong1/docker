@@ -79,9 +79,9 @@ RUN /home/rstudio/venv/bin/pip3 install leidenalg==0.10.2
 RUN /home/rstudio/venv/bin/pip3 install scvi-tools==1.1.2
 RUN /home/rstudio/venv/bin/pip3 install scanpy==1.10.1
 
-# install python packages globally
+# install python packages
 RUN pip install MACS2==2.2.9.1
 
-# set locale
+# export R environment variables
 ENV LANG=en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8
