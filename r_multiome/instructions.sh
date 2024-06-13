@@ -1,13 +1,9 @@
 # run on local
 docker buildx build --platform linux/amd64 -t amosfong1/r_multiome:4.3.2 .
-
-# run on local
 docker push amosfong1/r_multiome:4.3.2
 
 # run on server
 singularity pull docker://amosfong1/r_multiome:4.3.2
-
-# run on server
 sh rscript.sh
 sh rserver.sh
 

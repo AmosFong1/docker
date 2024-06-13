@@ -1,0 +1,19 @@
+# use images from jupyter
+FROM jupyter/scipy-notebook:python-3.11
+
+# set user
+USER root
+
+# install ubuntu packages
+RUN apt-get update && \
+    apt-get install -y \
+    bash \
+    wget \
+    default-jdk \
+    openjdk-8-jdk
+
+# export snakemake environment variables
+ENV XDG_CACHE_HOME=/tmp
+
+# install python packages
+RUN pip install squidpy
