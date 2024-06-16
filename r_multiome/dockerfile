@@ -63,7 +63,7 @@ RUN Rscript -e "install.packages('tidyverse')"
 RUN Rscript -e "install.packages('randomcoloR')"
 RUN Rscript -e "install.packages('ggrastr')"
 
-# create venv
+# add venv
 RUN apt-get install -y \
     python3 \
     python3-venv \
@@ -72,7 +72,7 @@ RUN python3 -m venv /home/rstudio/venv
 RUN chmod -R 777 /home/rstudio
 ENV VIRTUAL_ENV=/home/rstudio/venv
 
-# install python packages in venv
+# install python packages
 RUN /home/rstudio/venv/bin/pip3 install pandas
 RUN /home/rstudio/venv/bin/pip3 install numpy
 RUN /home/rstudio/venv/bin/pip3 install leidenalg==0.10.2
@@ -82,6 +82,6 @@ RUN /home/rstudio/venv/bin/pip3 install scanpy==1.10.1
 # install python packages
 RUN pip install MACS2==2.2.9.1
 
-# export R environment variables
+# add R environment variables
 ENV LANG=en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8

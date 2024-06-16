@@ -12,7 +12,7 @@ RUN apt-get update && \
     default-jdk \
     openjdk-8-jdk
 
-# export snakemake environment variables
+# add snakemake environment variables
 ENV XDG_CACHE_HOME=/tmp
 
 # install python packages
