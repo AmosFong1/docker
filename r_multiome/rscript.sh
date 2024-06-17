@@ -1,8 +1,8 @@
 #!/bin/bash
 
-IMAGE=/projects/dscott_prj/amfong/Multiome/images/r_multiome_4.3.2.sif
+IMAGE=/projects/dscott_prj/amfong/multiome_dz/images/r_multiome_4.3.2.sif
 HOME=/home/amfong
-SCRIPT=/projects/dscott_prj/amfong/Multiome/scratch/rscript.R
+SCRIPT=/projects/dscott_prj/amfong/multiome_dz/scratch/rscript.R
 
 singularity exec \
     --home=${HOME} \

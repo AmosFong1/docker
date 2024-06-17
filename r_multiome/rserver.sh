@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMAGE=/projects/dscott_prj/amfong/Multiome/images/r_multiome_4.3.2.sif
+IMAGE=/projects/dscott_prj/amfong/multiome_dz/images/r_multiome_4.3.2.sif
 HOME=/home/amfong
 PORT=8030
 export PASSWORD='famousamos'
