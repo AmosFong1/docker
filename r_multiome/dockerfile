@@ -48,20 +48,23 @@ RUN Rscript -e "BiocManager::install('edgeR')"
 RUN Rscript -e "BiocManager::install('BiocSingular')"
 RUN Rscript -e "BiocManager::install('scater')"
 RUN Rscript -e "BiocManager::install('scDblFinder')"
-RUN Rscript -e "BiocManager::install('batchelor')"
 RUN Rscript -e "remotes::install_github('satijalab/seurat-wrappers')"
 RUN Rscript -e "remotes::install_github('massonix/SLOcatoR')"
 RUN Rscript -e "remotes::install_github('morinlab/GAMBLR.data')"
 RUN Rscript -e "remotes::install_github('cellgeni/sceasy')"
-RUN Rscript -e "remotes::install_github('satijalab/azimuth', ref = 'master')"
+RUN Rscript -e "remotes::install_github('satijalab/azimuth')"
 RUN apt-get install -y jags
 RUN Rscript -e "BiocManager::install('infercnv')"
 RUN Rscript -e "remotes::install_github('GreenleafLab/ArchR', ref='master', repos = BiocManager::repositories())"
 RUN Rscript -e "library(ArchR)" -e "ArchR::installExtraPackages()"
 RUN Rscript -e "remotes::install_github('GreenleafLab/chromVARmotifs')"
 RUN Rscript -e "install.packages('tidyverse')"
-RUN Rscript -e "install.packages('randomcoloR')"
 RUN Rscript -e "install.packages('ggrastr')"
+RUN Rscript -e "install.packages('ggExtra')"
+RUN Rscript -e "remotes::install_github('ajiangsfu/PRPS')"
+RUN Rscript -e "install.packages('ggpubr')"
+RUN Rscript -e "install.packages('ggpmisc')"
+RUN Rscript -e "install.packages('randomcoloR')"
 
 # add venv
 RUN apt-get install -y \
@@ -73,8 +76,8 @@ RUN chmod -R 777 /home/rstudio
 ENV VIRTUAL_ENV=/home/rstudio/venv
 
 # install python packages
-RUN /home/rstudio/venv/bin/pip3 install pandas
-RUN /home/rstudio/venv/bin/pip3 install numpy
+RUN /home/rstudio/venv/bin/pip3 install pandas==2.2.2
+RUN /home/rstudio/venv/bin/pip3 install numpy==1.26.4
 RUN /home/rstudio/venv/bin/pip3 install leidenalg==0.10.2
 RUN /home/rstudio/venv/bin/pip3 install scvi-tools==1.1.2
 RUN /home/rstudio/venv/bin/pip3 install scanpy==1.10.1
