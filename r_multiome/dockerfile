@@ -22,53 +22,8 @@ RUN apt-get update && \
     libgit2-dev \
     libgsl27 \
     libgsl-dev \
-    cmake
-
-# install R packages
-RUN Rscript -e "install.packages(c('BiocManager', 'devtools', 'remotes'))"
-RUN Rscript -e "install.packages('hdf5r')"
-RUN Rscript -e "install.packages('magick')"
-RUN Rscript -e "install.packages('harmony')"
-RUN Rscript -e "install.packages('circlize')"
-RUN Rscript -e "install.packages('rstatix')"
-RUN Rscript -e "install.packages('fastTopics')"
-RUN Rscript -e "install.packages('SoupX')"
-RUN Rscript -e "install.packages('UpSetR')"
-RUN Rscript -e "install.packages('ggalluvial')"
-RUN Rscript -e "install.packages('ggbeeswarm')"
-RUN Rscript -e "install.packages('languageserver')"
-RUN Rscript -e "BiocManager::install('BSgenome.Hsapiens.UCSC.hg38')"
-RUN Rscript -e "BiocManager::install('chromVAR')"
-RUN Rscript -e "BiocManager::install('ComplexHeatmap')"
-RUN Rscript -e "BiocManager::install('DESeq2')"
-RUN Rscript -e "BiocManager::install('HCATonsilData')"
-RUN Rscript -e "BiocManager::install('limma')"
-RUN Rscript -e "BiocManager::install('biovizBase')"
-RUN Rscript -e "BiocManager::install('edgeR')"
-RUN Rscript -e "BiocManager::install('BiocSingular')"
-RUN Rscript -e "BiocManager::install('scater')"
-RUN Rscript -e "BiocManager::install('scDblFinder')"
-RUN Rscript -e "remotes::install_github('satijalab/seurat-wrappers')"
-RUN Rscript -e "remotes::install_github('massonix/SLOcatoR')"
-RUN Rscript -e "remotes::install_github('morinlab/GAMBLR.data')"
-RUN Rscript -e "remotes::install_github('cellgeni/sceasy')"
-RUN Rscript -e "remotes::install_github('satijalab/azimuth')"
-RUN apt-get install -y jags
-RUN Rscript -e "BiocManager::install('infercnv')"
-RUN Rscript -e "remotes::install_github('GreenleafLab/ArchR', ref='master', repos = BiocManager::repositories())"
-RUN Rscript -e "library(ArchR)" -e "ArchR::installExtraPackages()"
-RUN Rscript -e "remotes::install_github('GreenleafLab/chromVARmotifs')"
-RUN Rscript -e "install.packages('tidyverse')"
-RUN Rscript -e "install.packages('ggrastr')"
-RUN Rscript -e "install.packages('ggExtra')"
-RUN Rscript -e "remotes::install_github('ajiangsfu/PRPS')"
-RUN Rscript -e "install.packages('ggpubr')"
-RUN Rscript -e "install.packages('ggpmisc')"
-RUN Rscript -e "install.packages('randomcoloR')"
-RUN Rscript -e "remotes::install_github('immunogenomics/lisi')"
-RUN Rscript -e "BiocManager::install('ggtree')"
-RUN Rscript -e "remotes::install_github('theislab/kBET')"
-RUN Rscript -e "install.packages('DescTools')"
+    cmake \ 
+    jags
 
 # add venv
 RUN apt-get install -y \
@@ -78,6 +33,47 @@ RUN apt-get install -y \
 RUN python3 -m venv /home/rstudio/venv
 RUN chmod -R 777 /home/rstudio
 ENV VIRTUAL_ENV=/home/rstudio/venv
+
+# install R packages
+RUN Rscript -e "install.packages(c('BiocManager', 'devtools', 'remotes'))"
+RUN Rscript -e "install.packages('hdf5r')"
+RUN Rscript -e "install.packages('magick')"
+RUN Rscript -e "install.packages('harmony')"
+RUN Rscript -e "install.packages('circlize')"
+RUN Rscript -e "install.packages('rstatix')"
+RUN Rscript -e "install.packages('SoupX')"
+RUN Rscript -e "install.packages('UpSetR')"
+RUN Rscript -e "install.packages('ggalluvial')"
+RUN Rscript -e "install.packages('ggbeeswarm')"
+RUN Rscript -e "install.packages('languageserver')"
+RUN Rscript -e "install.packages('tidyverse')"
+RUN Rscript -e "install.packages('ggrastr')"
+RUN Rscript -e "install.packages('ggExtra')"
+RUN Rscript -e "install.packages('ggpubr')"
+RUN Rscript -e "install.packages('ggpmisc')"
+RUN Rscript -e "install.packages('randomcoloR')"
+RUN Rscript -e "install.packages('DescTools')"
+RUN Rscript -e "BiocManager::install('BSgenome.Hsapiens.UCSC.hg38')"
+RUN Rscript -e "BiocManager::install('ComplexHeatmap')"
+RUN Rscript -e "BiocManager::install('HCATonsilData')"
+RUN Rscript -e "BiocManager::install('limma')"
+RUN Rscript -e "BiocManager::install('biovizBase')"
+RUN Rscript -e "BiocManager::install('edgeR')"
+RUN Rscript -e "BiocManager::install('BiocSingular')"
+RUN Rscript -e "BiocManager::install('scater')"
+RUN Rscript -e "BiocManager::install('scDblFinder')"
+RUN Rscript -e "BiocManager::install('infercnv')"
+RUN Rscript -e "BiocManager::install('ggtree')"
+RUN Rscript -e "remotes::install_github('satijalab/seurat-wrappers')"
+RUN Rscript -e "remotes::install_github('cellgeni/sceasy')"
+RUN Rscript -e "remotes::install_github('satijalab/azimuth')"
+RUN Rscript -e "remotes::install_github('GreenleafLab/ArchR', ref='master', repos = BiocManager::repositories())"
+RUN Rscript -e "library(ArchR)" -e "ArchR::installExtraPackages()"
+RUN Rscript -e "remotes::install_github('GreenleafLab/chromVARmotifs')"
+RUN Rscript -e "remotes::install_github('immunogenomics/lisi')"
+RUN Rscript -e "remotes::install_github('theislab/kBET')"
+RUN Rscript -e "remotes::install_github('ajiangsfu/PRPS')"
+RUN Rscript -e "remotes::install_github('morinlab/GAMBLR.data')"
 
 # install python packages
 RUN /home/rstudio/venv/bin/pip3 install pandas==2.2.2
