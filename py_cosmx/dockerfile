@@ -25,3 +25,4 @@ RUN pip install spatialdata-io
 RUN pip install randomcolor==0.4.4.6
 RUN pip install scikit-misc
 RUN pip install wget
+RUN pip install matplotlib==3.9.2
