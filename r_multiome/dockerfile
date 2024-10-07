@@ -34,6 +34,15 @@ RUN python3 -m venv /home/rstudio/venv
 RUN chmod -R 777 /home/rstudio
 ENV VIRTUAL_ENV=/home/rstudio/venv
 
+# install python packages
+RUN /home/rstudio/venv/bin/pip3 install pandas==2.2.2
+RUN /home/rstudio/venv/bin/pip3 install numpy==1.26.4
+RUN /home/rstudio/venv/bin/pip3 install leidenalg==0.10.2
+RUN /home/rstudio/venv/bin/pip3 install scanpy==1.10.1
+
+# install python packages
+RUN pip install MACS2==2.2.9.1
+
 # install R packages
 RUN Rscript -e "install.packages(c('BiocManager', 'devtools', 'remotes'))"
 RUN Rscript -e "install.packages('hdf5r')"
@@ -53,6 +62,8 @@ RUN Rscript -e "install.packages('ggpubr')"
 RUN Rscript -e "install.packages('ggpmisc')"
 RUN Rscript -e "install.packages('randomcoloR')"
 RUN Rscript -e "install.packages('DescTools')"
+RUN Rscript -e "install.packages('lmerTest')"
+RUN Rscript -e "install.packages('msigdbr')"
 RUN Rscript -e "BiocManager::install('BSgenome.Hsapiens.UCSC.hg38')"
 RUN Rscript -e "BiocManager::install('ComplexHeatmap')"
 RUN Rscript -e "BiocManager::install('HCATonsilData')"
@@ -64,25 +75,14 @@ RUN Rscript -e "BiocManager::install('scater')"
 RUN Rscript -e "BiocManager::install('scDblFinder')"
 RUN Rscript -e "BiocManager::install('infercnv')"
 RUN Rscript -e "BiocManager::install('ggtree')"
+RUN Rscript -e "BiocManager::install('fgsea')"
 RUN Rscript -e "remotes::install_github('satijalab/seurat-wrappers')"
-RUN Rscript -e "remotes::install_github('cellgeni/sceasy')"
 RUN Rscript -e "remotes::install_github('satijalab/azimuth')"
 RUN Rscript -e "remotes::install_github('GreenleafLab/ArchR', ref='master', repos = BiocManager::repositories())"
 RUN Rscript -e "library(ArchR)" -e "ArchR::installExtraPackages()"
 RUN Rscript -e "remotes::install_github('GreenleafLab/chromVARmotifs')"
-RUN Rscript -e "remotes::install_github('immunogenomics/lisi')"
-RUN Rscript -e "remotes::install_github('theislab/kBET')"
 RUN Rscript -e "remotes::install_github('ajiangsfu/PRPS')"
 RUN Rscript -e "remotes::install_github('morinlab/GAMBLR.data')"
-
-# install python packages
-RUN /home/rstudio/venv/bin/pip3 install pandas==2.2.2
-RUN /home/rstudio/venv/bin/pip3 install numpy==1.26.4
-RUN /home/rstudio/venv/bin/pip3 install leidenalg==0.10.2
-RUN /home/rstudio/venv/bin/pip3 install scanpy==1.10.1
-
-# install python packages
-RUN pip install MACS2==2.2.9.1
 
 # add R environment variables
 ENV LANG=en_US.UTF-8
