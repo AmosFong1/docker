@@ -83,6 +83,7 @@ RUN Rscript -e "library(ArchR)" -e "ArchR::installExtraPackages()"
 RUN Rscript -e "remotes::install_github('GreenleafLab/chromVARmotifs')"
 RUN Rscript -e "remotes::install_github('ajiangsfu/PRPS')"
 RUN Rscript -e "remotes::install_github('morinlab/GAMBLR.data')"
+RUN Rscript -e "remotes::install_github('jinworks/CellChat')"
 
 # add R environment variables
 ENV LANG=en_US.UTF-8
