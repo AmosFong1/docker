@@ -28,5 +28,5 @@ RUN wget https://github.com/mimno/Mallet/releases/download/v202108/Mallet-202108
 RUN pip install polars-lts-cpu
 RUN pip install wget
 
-# add privilages to /home/jovyan
+# change permissions
 RUN chmod -R 777 /home/jovyan

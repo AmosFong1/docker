@@ -26,3 +26,5 @@ RUN pip install randomcolor==0.4.4.6
 RUN pip install scikit-misc
 RUN pip install wget
 RUN pip install matplotlib==3.9.2
+RUN pip install liana==1.4.0
+RUN pip install decoupler==1.8.0
