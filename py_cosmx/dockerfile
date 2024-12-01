@@ -19,12 +19,10 @@ ENV XDG_CACHE_HOME=/tmp
 RUN pip install pandas==2.2.2
 RUN pip install numpy==1.26.4
 RUN pip install leidenalg==0.10.2
-RUN pip install scanpy==1.10.1
-RUN pip install squidpy==1.5.0
-RUN pip install spatialdata-io
+RUN pip install scanpy==1.10.4
+RUN pip install squidpy==1.6.2
 RUN pip install randomcolor==0.4.4.6
-RUN pip install scikit-misc
-RUN pip install wget
+RUN pip install scikit-misc==0.5.1
+RUN pip install wget==3.2
 RUN pip install matplotlib==3.9.2
-RUN pip install liana==1.4.0
-RUN pip install decoupler==1.8.0
+RUN pip install harmonypy==0.0.10
