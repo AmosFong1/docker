@@ -1,19 +1,19 @@
 # docker
 This is how I launch Docker containers!
 
-## 1: build docker image
+## 1 build docker image
 ```
 cd ${PATH_TO_DOCKERFILE}
-docker buildx build --platform linux/amd64 -t ${USERNAME}/${DOCKER_IMAGE_NAME}:${TAG} .
-docker push ${USERNAME}/${DOCKER_IMAGE_NAME}:${TAG}
+docker buildx build --platform linux/amd64 -t ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TAG} .
+docker push ${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TAG}
 ```
 
-## 2: pull singularity image file
+## 2 pull singularity image file
 ```
-singularity pull docker://${USERNAME}/${DOCKER_IMAGE_NAME}:${TAG}
+singularity pull docker://${DOCKER_USERNAME}/${DOCKER_IMAGE_NAME}:${TAG}
 ```
 
-## 3: create container
+## 3 create container
 ```
 sh rscript.sh
 sh rserver.sh
@@ -21,11 +21,11 @@ sh python.sh
 sh jupyter_lab.sh
 ```
 
-## 4: local port forwarding
+## 4 local port forwarding
 ```
 ssh -oHostKeyAlgorithms=+ssh-rsa -N -L ${LOCAL_PORT}:${REMOTE_HOST}:${REMOTE_PORT} amfong@ssh.bcgsc.ca -v
 ```
 
-## access remote service
+## 5 access remote service
 Open your browser and go to: `http://localhost:${LOCAL_PORT}`
 
