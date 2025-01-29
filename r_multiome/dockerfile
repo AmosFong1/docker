@@ -1,87 +1,86 @@
 # use images from rocker
-FROM rocker/rstudio:4.3.2
+FROM bioconductor/bioconductor_docker:3.18
 
-# set user
-USER root
+# add environment variables
+ENV LANG=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
 
-# install ubuntu packages 
-RUN apt-get update && \
-    apt-get install -y \
-    bash \
-    patch \
-    libmagick++-dev \
-    libhdf5-dev \
-    libcurl4-openssl-dev \
-    libssl-dev \
-    libpng-dev \
-    libxt-dev \
-    zlib1g-dev \
-    libbz2-dev \
-    liblzma-dev \
-    libglpk40 \
-    libgit2-dev \
-    libgsl27 \
-    libgsl-dev \
-    cmake \ 
-    jags \
-    curl
+# install ubuntu packages
+RUN apt-get update \
+    && apt-get install -y -f --no-install-recommends python3-pip \
+    && apt-get install -y -f --no-install-recommends python3-venv
 
-# add venv
-RUN apt-get install -y \
-    python3 \
-    python3-venv \
-    python3-pip
-RUN python3 -m venv /home/rstudio/venv
-RUN chmod -R 777 /home/rstudio
+# create venv
+RUN python3 -m venv /home/rstudio/venv \
+    && chmod -R 777 /home/rstudio
 ENV VIRTUAL_ENV=/home/rstudio/venv
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-# install python packages
-RUN /home/rstudio/venv/bin/pip3 install pandas==2.2.2
-RUN /home/rstudio/venv/bin/pip3 install numpy==1.26.4
-RUN /home/rstudio/venv/bin/pip3 install leidenalg==0.10.2
-RUN /home/rstudio/venv/bin/pip3 install scanpy==1.10.1
+# install python packages in venv
+RUN $VIRTUAL_ENV/bin/pip install pandas==2.2.2 \
+    && $VIRTUAL_ENV/bin/pip install numpy==1.26.4 \
+    && $VIRTUAL_ENV/bin/pip install leidenalg==0.10.2 \
+    && $VIRTUAL_ENV/bin/pip install scanpy==1.10.1
 
-# install python packages
+# install python packages globally
 RUN pip install MACS2==2.2.9.1
 
 # install R packages
-RUN Rscript -e "install.packages(c('BiocManager', 'devtools', 'remotes'))"
-RUN Rscript -e "install.packages('hdf5r')"
-RUN Rscript -e "install.packages('magick')"
-RUN Rscript -e "install.packages('harmony')"
-RUN Rscript -e "install.packages('circlize')"
-RUN Rscript -e "install.packages('SoupX')"
-RUN Rscript -e "install.packages('UpSetR')"
-RUN Rscript -e "install.packages('ggalluvial')"
-RUN Rscript -e "install.packages('ggbeeswarm')"
-RUN Rscript -e "install.packages('languageserver')"
-RUN Rscript -e "install.packages('tidyverse')"
-RUN Rscript -e "install.packages('ggrastr')"
-RUN Rscript -e "install.packages('ggExtra')"
-RUN Rscript -e "install.packages('randomcoloR')"
-RUN Rscript -e "install.packages('lmerTest')"
-RUN Rscript -e "BiocManager::install('ComplexHeatmap')"
-RUN Rscript -e "BiocManager::install('limma')"
-RUN Rscript -e "BiocManager::install('biovizBase')"
-RUN Rscript -e "BiocManager::install('edgeR')"
-RUN Rscript -e "BiocManager::install('BiocSingular')"
-RUN Rscript -e "BiocManager::install('scater')"
-RUN Rscript -e "BiocManager::install('scDblFinder')"
-RUN Rscript -e "BiocManager::install('ggtree')"
-RUN Rscript -e "BiocManager::install('fgsea')"
-RUN Rscript -e "BiocManager::install('BSgenome.Hsapiens.UCSC.hg38')"
-RUN Rscript -e "BiocManager::install('slingshot')"
-RUN Rscript -e "BiocManager::install('infercnv')"
-RUN Rscript -e "BiocManager::install('tradeSeq')"
-RUN Rscript -e "BiocManager::install('HCATonsilData')"
-RUN Rscript -e "remotes::install_github('satijalab/seurat-wrappers')"
-RUN Rscript -e "remotes::install_github('satijalab/azimuth')"
-RUN Rscript -e "remotes::install_github('jinworks/CellChat')"
+RUN Rscript -e "install.packages('BiocManager')" -e "library('BiocManager')"
+RUN Rscript -e "install.packages('remotes')" -e "library('remotes')"
+RUN Rscript -e "install.packages('devtools')" -e "library('devtools')"
+RUN Rscript -e "install.packages('magick')" -e "library(magick)"
+RUN Rscript -e "install.packages('RcppProgress')" -e "library('RcppProgress')"
+RUN Rscript -e "install.packages('harmony')" -e "library('harmony')"
+RUN Rscript -e "install.packages('circlize')" -e "library('circlize')"
+RUN Rscript -e "install.packages('plotly')" -e "library('plotly')"
+RUN Rscript -e "install.packages('spatstat.random')" -e "library('spatstat.random')"
+RUN Rscript -e "install.packages('SoupX')" -e "library('SoupX')"
+RUN Rscript -e "install.packages('UpSetR')" -e "library('UpSetR')"
+RUN Rscript -e "install.packages('ggalluvial')" -e "library('ggalluvial')"
+RUN Rscript -e "install.packages('ggbeeswarm')" -e "library('ggbeeswarm')"
+RUN Rscript -e "install.packages('languageserver')" -e "library('languageserver')"
+RUN Rscript -e "install.packages('tidyverse')" -e "library('tidyverse')"
+RUN Rscript -e "install.packages('ggrastr')" -e "library('ggrastr')"
+RUN Rscript -e "install.packages('randomcoloR')" -e "library('randomcoloR')"
+RUN Rscript -e "install.packages('lmerTest')" -e "library('lmerTest')"
+RUN Rscript -e "install.packages('plyr')" -e "library('plyr')"
+RUN Rscript -e "install.packages('bit')" -e "library('bit')"
+RUN Rscript -e "install.packages('pracma')" -e "library('pracma')"
+RUN Rscript -e "install.packages('caTools')" -e "library('caTools')"
+RUN Rscript -e "install.packages('R.utils')" -e "library('R.utils')"
+RUN Rscript -e "install.packages('dichromat')" -e "library('dichromat')"
+RUN Rscript -e "BiocManager::install('Biostrings')" -e "library('Biostrings')"
+RUN Rscript -e "BiocManager::install('GenomicRanges')" -e "library('GenomicRanges')"
+RUN Rscript -e "BiocManager::install('BSgenome')" -e "library('BSgenome')"
+RUN Rscript -e "BiocManager::install('ComplexHeatmap')" -e "library('ComplexHeatmap')"
+RUN Rscript -e "BiocManager::install('biovizBase')" -e "library('biovizBase')"
+RUN Rscript -e "BiocManager::install('BiocSingular')" -e "library('BiocSingular')"
+RUN Rscript -e "BiocManager::install('limma')" -e "library('limma')"
+RUN Rscript -e "BiocManager::install('edgeR')" -e "library('edgeR')"
+RUN Rscript -e "BiocManager::install('scater')" -e "library('scater')"
+RUN Rscript -e "BiocManager::install('scDblFinder')" -e "library('scDblFinder')"
+RUN Rscript -e "BiocManager::install('fgsea')" -e "library('fgsea')"
+RUN Rscript -e "BiocManager::install('BSgenome.Hsapiens.UCSC.hg38')" -e "library('BSgenome.Hsapiens.UCSC.hg38')"
+RUN Rscript -e "BiocManager::install('infercnv')" -e "library('infercnv')"
+RUN Rscript -e "BiocManager::install('HCATonsilData')" -e "library('HCATonsilData')"
+RUN Rscript -e "BiocManager::install('BiocGenerics')" -e "library('BiocGenerics')"
+RUN Rscript -e "BiocManager::install('GenomeInfoDbData')" -e "library('GenomeInfoDbData')"
+RUN Rscript -e "BiocManager::install('CNEr')" -e "library('CNEr')"
+RUN Rscript -e "BiocManager::install('TFBSTools')" -e "library('TFBSTools')"
+RUN Rscript -e "BiocManager::install('motifmatchr')" -e "library('motifmatchr')"
+RUN Rscript -e "remotes::install_github('immunogenomics/presto')" - "library('presto')"
+RUN Rscript -e "remotes::install_github('GreenleafLab/chromVARmotifs')" -e "library('chromVARmotifs')"
 RUN Rscript -e "remotes::install_github('GreenleafLab/ArchR', ref='release_1.0.3', repos = BiocManager::repositories())"
-RUN Rscript -e "library(ArchR)" -e "ArchR::installExtraPackages()"
-RUN Rscript -e "remotes::install_github('GreenleafLab/chromVARmotifs')"
-RUN Rscript -e "remotes::install_github('ajiangsfu/PRPS')"
+RUN Rscript -e "library('ArchR')" -e "ArchR::installExtraPackages()"
+RUN Rscript -e "remotes::install_github('satijalab/seurat-wrappers')"
+RUN Rscript -e "remotes::install_github('mojaveazure/seurat-disk')"
+RUN Rscript -e "remotes::install_github('satijalab/azimuth')" -e "library(Azimuth)"
+RUN Rscript -e "remotes::install_github('ajiangsfu/PRPS')" -e "library(PRPS)"
+RUN Rscript -e "remotes::install_github('jinworks/CellChat')" -e "library(CellChat)"
+RUN Rscript -e "BiocManager::install('slingshot')" -e "library(slingshot)"
+RUN Rscript -e "BiocManager::install('tradeSeq')" -e "library(tradeSeq)"
 
-# add R environment variables
-ENV LANG=en_US.UTF-8
-ENV LC_ALL=en_US.UTF-8
+# clear cache
+RUN apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
