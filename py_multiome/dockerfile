@@ -1,33 +1,31 @@
 # use images from jupyter
 FROM jupyter/scipy-notebook:python-3.11
-
-# set user
 USER root
 
 # install ubuntu packages
-RUN apt-get update && \
-    apt-get install -y \
-    bash \
-    wget \
-    default-jdk \
-    openjdk-8-jdk
+RUN apt-get update \
+    && apt-get install -y -f --no-install-recommends openjdk-8-jdk \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # add snakemake environment variables
 ENV XDG_CACHE_HOME=/tmp
 
 # install python packages
-RUN git clone https://github.com/aertslab/scenicplus && \
-    cd scenicplus && \
-    pip install .
+RUN git clone https://github.com/aertslab/scenicplus \
+    && cd scenicplus \
+    && pip install .
 
 # install java packages
-RUN wget https://github.com/mimno/Mallet/releases/download/v202108/Mallet-202108-bin.tar.gz && \
-    tar -xf Mallet-202108-bin.tar.gz
+RUN wget https://github.com/mimno/Mallet/releases/download/v202108/Mallet-202108-bin.tar.gz \
+    && tar -xf Mallet-202108-bin.tar.gz \
+    && chmod -R 777 /home/jovyan
     
 # install python packages
-RUN pip install polars-lts-cpu
-RUN pip install wget
-RUN pip install deeptools
-
-# change permissions
-RUN chmod -R 777 /home/jovyan
+RUN pip install polars-lts-cpu==1.17.1
+RUN pip install pandas==2.2.2
+RUN pip install numpy==1.26.4
+RUN pip install leidenalg==0.10.2
+RUN pip install scanpy==1.10.4
+RUN pip install scikit-misc==0.5.1
+RUN pip install harmonypy==0.0.10
