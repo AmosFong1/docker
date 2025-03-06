@@ -66,19 +66,17 @@ RUN Rscript -e "BiocManager::install('HCATonsilData')" -e "library('HCATonsilDat
 RUN Rscript -e "BiocManager::install('BiocGenerics')" -e "library('BiocGenerics')"
 RUN Rscript -e "BiocManager::install('GenomeInfoDbData')" -e "library('GenomeInfoDbData')"
 RUN Rscript -e "BiocManager::install('CNEr')" -e "library('CNEr')"
-RUN Rscript -e "BiocManager::install('TFBSTools')" -e "library('TFBSTools')"
+RUN Rscript -e "BiocManager::install('TFBSTools', type = 'source', force = TRUE)" -e "library('TFBSTools')"
 RUN Rscript -e "BiocManager::install('motifmatchr')" -e "library('motifmatchr')"
 RUN Rscript -e "remotes::install_github('immunogenomics/presto')" - "library('presto')"
 RUN Rscript -e "remotes::install_github('GreenleafLab/chromVARmotifs')" -e "library('chromVARmotifs')"
-RUN Rscript -e "remotes::install_github('GreenleafLab/ArchR', ref='release_1.0.3', repos = BiocManager::repositories())"
+RUN Rscript -e "remotes::install_github('GreenleafLab/ArchR', ref='master', repos = BiocManager::repositories())"
 RUN Rscript -e "library('ArchR')" -e "ArchR::installExtraPackages()"
 RUN Rscript -e "remotes::install_github('satijalab/seurat-wrappers')"
 RUN Rscript -e "remotes::install_github('mojaveazure/seurat-disk')"
 RUN Rscript -e "remotes::install_github('satijalab/azimuth')" -e "library(Azimuth)"
 RUN Rscript -e "remotes::install_github('ajiangsfu/PRPS')" -e "library(PRPS)"
 RUN Rscript -e "remotes::install_github('jinworks/CellChat')" -e "library(CellChat)"
-RUN Rscript -e "BiocManager::install('slingshot')" -e "library(slingshot)"
-RUN Rscript -e "BiocManager::install('tradeSeq')" -e "library(tradeSeq)"
 
 # clear cache
 RUN apt-get clean \

@@ -24,3 +24,5 @@ RUN pip install matplotlib==3.9.2
 RUN pip install deepcell==0.12.10
 RUN pip install opencv-python==4.11.0.86
 RUN pip install scikit-image==0.23.2
+RUN pip install torch
+RUN pip install torch_geometric
