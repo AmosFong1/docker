@@ -29,3 +29,4 @@ RUN pip install leidenalg==0.10.2
 RUN pip install scanpy==1.10.4
 RUN pip install scikit-misc==0.5.1
 RUN pip install harmonypy==0.0.10
+RUN pip install scvelo==0.3.3
