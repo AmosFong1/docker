@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMAGE="/projects/dscott_prj/amfong/cosmx_dz/images/r_cosmx_4.3.3.sif"
+IMAGE="/projects/dscott_prj/amfong/scratch/images/r_gamblr_4.3.3.sif"
 HOME="/home/amfong"
 PORT=8030
 export PASSWORD="famousamos"

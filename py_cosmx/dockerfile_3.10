@@ -1,5 +1,5 @@
 # use images from jupyter
-FROM jupyter/scipy-notebook:python-3.11
+FROM jupyter/scipy-notebook:python-3.10
 USER root
 
 # install ubuntu packages
@@ -21,6 +21,8 @@ RUN pip install dask==2024.11.2
 RUN pip install squidpy==1.6.2
 RUN pip install randomcolor==0.4.4.6
 RUN pip install matplotlib==3.9.2
+RUN pip install deepcell==0.12.10
 RUN pip install opencv-python==4.11.0.86
 RUN pip install scikit-image==0.23.2
-RUN pip install cellpose==3.1.1.1
+RUN pip install torch
+RUN pip install torch_geometric

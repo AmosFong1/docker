@@ -68,6 +68,8 @@ RUN Rscript -e "BiocManager::install('GenomeInfoDbData')" -e "library('GenomeInf
 RUN Rscript -e "BiocManager::install('CNEr')" -e "library('CNEr')"
 RUN Rscript -e "BiocManager::install('TFBSTools', type = 'source', force = TRUE)" -e "library('TFBSTools')"
 RUN Rscript -e "BiocManager::install('motifmatchr')" -e "library('motifmatchr')"
+RUN Rscript -e "BiocManager::install('slingshot')" -e "library('slingshot')"
+RUN Rscript -e "BiocManager::install('tradeSeq')" -e "library('tradeSeq')"
 RUN Rscript -e "remotes::install_github('immunogenomics/presto')" - "library('presto')"
 RUN Rscript -e "remotes::install_github('GreenleafLab/chromVARmotifs')" -e "library('chromVARmotifs')"
 RUN Rscript -e "remotes::install_github('GreenleafLab/ArchR', ref='release_1.0.3', repos = BiocManager::repositories())"

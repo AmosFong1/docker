@@ -7,8 +7,10 @@ PORT=7890
 singularity exec \
     --home="${HOME}" \
     --bind="/home/amfong" \
-    --bind="/projects/dscott_prj/amfong" \
-    --bind="/projects/dscott_scratch/amfong" \
+    --bind="/projects/dscott_prj/" \
+    --bind="/projects/dscott_scratch/" \
+    --bind="/projects/rmorin" \
+    --bind="/projects/clc" \
     --bind="/tmp" \
     "${IMAGE}" jupyter lab \
     --port=${PORT} \

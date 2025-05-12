@@ -22,9 +22,6 @@ RUN $VIRTUAL_ENV/bin/pip install pandas==2.2.2 \
     && $VIRTUAL_ENV/bin/pip install leidenalg==0.10.2 \
     && $VIRTUAL_ENV/bin/pip install scanpy==1.10.1
 
-# install python packages globally
-RUN pip install MACS2==2.2.9.1
-
 # install R packages
 RUN Rscript -e "install.packages('BiocManager')" -e "library('BiocManager')"
 RUN Rscript -e "install.packages('remotes')" -e "library('remotes')"
@@ -56,9 +53,9 @@ RUN Rscript -e "remotes::install_github('mojaveazure/seurat-disk')"
 RUN Rscript -e "remotes::install_github('satijalab/azimuth')" -e "library(Azimuth)"
 RUN Rscript -e "remotes::install_github('ajiangsfu/PRPS')" -e "library(PRPS)"
 RUN Rscript -e "remotes::install_github('jinworks/CellChat')" -e "library(CellChat)"
-RUN Rscript -e "remotes::install_github('drieslab/GiottoUtils', upgrade = 'never', ref = 'bec3c79398a9aff299a01cc152ff6f2245a8f965')" -e "library(GiottoUtils)"
-RUN Rscript -e "remotes::install_github('drieslab/GiottoClass', upgrade = 'never', ref = '6d9d385beebcc57b78d34ffbe30be1ef0a184681')" -e "library(GiottoClass)"
-RUN Rscript -e "remotes::install_github('Nanostring-Biostats/FastReseg', ref = 'main', dependencies = FALSE)" -e "library(FastReseg)"
+# RUN Rscript -e "remotes::install_github('drieslab/GiottoUtils', upgrade = 'never', ref = 'bec3c79398a9aff299a01cc152ff6f2245a8f965')" -e "library(GiottoUtils)"
+# RUN Rscript -e "remotes::install_github('drieslab/GiottoClass', upgrade = 'never', ref = '6d9d385beebcc57b78d34ffbe30be1ef0a184681')" -e "library(GiottoClass)"
+# RUN Rscript -e "remotes::install_github('Nanostring-Biostats/FastReseg', ref = 'main', dependencies = FALSE)" -e "library(FastReseg)"
 
 # clear cache
 RUN apt-get clean \

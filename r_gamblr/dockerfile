@@ -1,0 +1,32 @@
+# use images from rocker
+FROM bioconductor/bioconductor_docker:3.18
+
+# add environment variables
+ENV LANG=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
+
+# install ubuntu packages
+RUN apt-get update \
+    && apt-get install -y -f --no-install-recommends python3-pip \
+    && apt-get install -y -f --no-install-recommends python3-venv
+
+# create venv
+RUN python3 -m venv /home/rstudio/venv \
+    && chmod -R 777 /home/rstudio
+ENV VIRTUAL_ENV=/home/rstudio/venv
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+# install R packages
+RUN Rscript -e "install.packages('BiocManager')" -e "library('BiocManager')"
+RUN Rscript -e "install.packages('remotes')" -e "library('remotes')"
+RUN Rscript -e "install.packages('devtools')" -e "library('devtools')"
+RUN Rscript -e "install.packages('tidyverse')" -e "library('tidyverse')"
+RUN Rscript -e "BiocManager::install('GenomicRanges')" -e "library('GenomicRanges')"
+RUN Rscript -e "BiocManager::install('BSgenome')" -e "library('BSgenome')"
+RUN Rscript -e "BiocManager::install('ComplexHeatmap')" -e "library('ComplexHeatmap')"
+RUN Rscript -e "BiocManager::install('BSgenome.Hsapiens.UCSC.hg38')" -e "library('BSgenome.Hsapiens.UCSC.hg38')"
+RUN Rscript -e "BiocManager::install('BSgenome.Hsapiens.UCSC.hg19')" -e "library('BSgenome.Hsapiens.UCSC.hg19')"
+RUN Rscript -e "BiocManager::install('org.Hs.eg.db')" -e "library('org.Hs.eg.db')"
+RUN Rscript -e "BiocManager::install('GenomicDistributions')" -e "library('GenomicDistributions')"
+RUN Rscript -e "remotes::install_github('morinlab/GAMBLR.helpers')" -e "library(GAMBLR.helpers)"
+RUN Rscript -e "remotes::install_github('morinlab/GAMBLR')" -e "library(GAMBLR)"

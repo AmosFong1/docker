@@ -41,5 +41,5 @@ ssh -oHostKeyAlgorithms=+ssh-rsa -N -L ${LOCAL_PORT}:${REMOTE_HOST}:${REMOTE_POR
 ```
 
 ## access remote service
-Open your browser and navigate to: `http://localhost:${LOCAL_PORT}`
+Open your browser and go to: `http://localhost:${LOCAL_PORT}`
 

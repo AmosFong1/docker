@@ -11,8 +11,10 @@ singularity exec \
     --bind="${TMPDIR}:/var/lib/rstudio-server" \
     --home="${HOME}" \
     --bind="/home/amfong" \
-    --bind="/projects/dscott_prj/amfong" \
-    --bind="/projects/dscott_scratch/amfong" \
+    --bind="/projects/dscott_prj/" \
+    --bind="/projects/dscott_scratch/" \
+    --bind="/projects/rmorin" \
+    --bind="/projects/clc" \
     --bind="/tmp" \
     "${IMAGE}" "/usr/lib/rstudio-server/bin/rserver" \
     --auth-none=0 \
