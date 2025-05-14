@@ -10,6 +10,7 @@ singularity exec \
     --bind="/projects/dscott_prj/" \
     --bind="/projects/dscott_scratch/" \
     --bind="/projects/rmorin" \
+    --bind="/projects/rmorin_scratch" \
     --bind="/projects/clc" \
     --bind="/tmp" \
     "${IMAGE}" jupyter lab \

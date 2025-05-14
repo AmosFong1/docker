@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMAGE="/projects/dscott_prj/amfong/cosmx_dz/images/py_cosmx_3.11.sif"
+IMAGE="/projects/dscott_prj/amfong/cosmx_dz/images/py_cellpose3_3.11.sif"
 HOME="/home/amfong"
 PORT=7890
 
