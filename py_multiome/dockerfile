@@ -1,45 +1,53 @@
-# use images from jupyter
+# Use images from jupyter
 FROM jupyter/scipy-notebook:python-3.11
 USER root
 
-# install ubuntu packages
+# Install ubuntu packages
 RUN apt-get update \
     && apt-get install -y -f --no-install-recommends default-jdk \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# add snakemake environment variables
+# Add snakemake environment variables
 ENV XDG_CACHE_HOME=/tmp
 
-# install python packages
+# Install python packages
 RUN git clone https://github.com/aertslab/scenicplus \
     && cd scenicplus \
     && pip install .
 
-# install java packages
+# Install java packages
 RUN wget https://github.com/mimno/Mallet/releases/download/v202108/Mallet-202108-bin.tar.gz \
     && tar -xf Mallet-202108-bin.tar.gz \
     && chmod -R 777 /home/jovyan
-    
-# install python packages
-RUN pip install polars-lts-cpu==1.17.1
-RUN pip install pandas==2.2.2
+
+# Install python packages
+RUN pip install pandas==2.1.1
 RUN pip install numpy==1.26.4
 RUN pip install leidenalg==0.10.2
 RUN pip install scanpy==1.10.4
 RUN pip install scikit-misc==0.5.1
 RUN pip install harmonypy==0.0.10
-RUN pip install velocyto==0.13.0
+RUN pip install pychromvar==0.0.4
+RUN pip install pyjaspar==3.0.0
+RUN pip install pydeseq2==0.5.1
+RUN pip install snapatac2==2.8.0
+RUN pip install anndata==0.10.5.post1
+RUN pip install palantir==1.4.0
+RUN pip install velocyto==0.17.17
+RUN pip install scvelo==0.3.3
 
-# install python packages
+# Install python packages
 RUN pip install torch==2.7.0
 RUN pip install torchvision==0.22.0
 RUN pip install torchaudio==2.7.0
 
-# install python packages
+# Install python packages
 RUN git clone https://github.com/buenrostrolab/scPrinter \
     && cd scPrinter \
     && pip install .
 
-# install python packages
+# Install python packages
 RUN pip install cupy-cuda12x==13.4.1
+RUN pip install polars-lts-cpu==1.30.0
+RUN pip install ema-pytorch==0.7.7
