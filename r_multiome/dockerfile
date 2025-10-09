@@ -56,11 +56,13 @@ RUN Rscript -e "BiocManager::install('DESeq2')" -e "library('DESeq2')"
 RUN Rscript -e "BiocManager::install('sva')" -e "library('sva')"
 
 # Install R packages
-RUN Rscript -e "remotes::install_github('immunogenomics/presto')" - "library('presto')"
+RUN Rscript -e "remotes::install_github('immunogenomics/presto')" -e "library('presto')"
 RUN Rscript -e "remotes::install_github('GreenleafLab/chromVARmotifs')" -e "library('chromVARmotifs')"
 RUN Rscript -e "remotes::install_github('satijalab/seurat-wrappers')"
 RUN Rscript -e "remotes::install_github('mojaveazure/seurat-disk')"
 RUN Rscript -e "remotes::install_github('jinworks/CellChat')" -e "library('CellChat')"
+RUN Rscript -e "remotes::install_github('saeyslab/nichenetr')" -e "library('nichenetr')"
+RUN Rscript -e "remotes::install_github('saeyslab/multinichenetr')" -e "library('multinichenetr')"
 
 # Clear cache
 RUN apt-get clean \

@@ -27,3 +27,5 @@ RUN pip install scikit-image==0.23.2
 RUN pip install cellpose==4.0.2
 RUN pip install pydeseq2==0.5.1
 RUN pip install gseapy==1.1.9
+RUN pip install lxml==6.0.2
+RUN pip install cellphonedb==5.0.1
