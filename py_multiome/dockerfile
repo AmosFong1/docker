@@ -37,19 +37,11 @@ RUN pip install palantir==1.4.0
 RUN pip install velocyto==0.17.17
 RUN pip install scvelo==0.3.3
 RUN pip install gseapy==1.1.9
-
-# Install python packages
 RUN pip install torch==2.7.0
 RUN pip install torchvision==0.22.0
 RUN pip install torchaudio==2.7.0
-
-# Install python packages
-RUN git clone https://github.com/buenrostrolab/scPrinter \
-    && cd scPrinter \
-    && pip install .
-
-# Install python packages
 RUN pip install cupy-cuda12x==13.4.1
 RUN pip install polars-lts-cpu==1.30.0
 RUN pip install ema-pytorch==0.7.7
 RUN pip install numba==0.61.2
+RUN pip install celltypist==1.7.1

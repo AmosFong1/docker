@@ -65,6 +65,9 @@ RUN Rscript -e "remotes::install_github('saeyslab/nichenetr')" -e "library('nich
 RUN Rscript -e "remotes::install_github('saeyslab/multinichenetr')" -e "library('multinichenetr')"
 RUN Rscript -e "remotes::install_github('davidsjoberg/ggsankey')" -e "library('ggsankey')"
 
+# Install R packages
+RUN Rscript -e "remotes::install_github('Nanostring-Biostats/CosMx-Analysis-Scratch-Space', subdir = '_code/smiDE')" -e "library('smiDE')"
+
 # Clear cache
 RUN apt-get clean \
     && rm -rf /var/lib/apt/lists/*
