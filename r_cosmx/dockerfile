@@ -54,6 +54,8 @@ RUN Rscript -e "BiocManager::install('EnsDb.Hsapiens.v86')" -e "library('EnsDb.H
 RUN Rscript -e "BiocManager::install('TFBSTools', type = 'source', force = TRUE)" -e "library('TFBSTools')"
 RUN Rscript -e "BiocManager::install('DESeq2')" -e "library('DESeq2')"
 RUN Rscript -e "BiocManager::install('sva')" -e "library('sva')"
+RUN Rscript -e "BiocManager::install('biovizBase')" -e "library('biovizBase')"
+RUN Rscript -e "BiocManager::install('AnnotationHub')" -e "library('AnnotationHub')"
 
 # Install R packages
 RUN Rscript -e "remotes::install_github('immunogenomics/presto')" -e "library('presto')"
@@ -63,7 +65,9 @@ RUN Rscript -e "remotes::install_github('mojaveazure/seurat-disk')"
 RUN Rscript -e "remotes::install_github('jinworks/CellChat')" -e "library('CellChat')"
 RUN Rscript -e "remotes::install_github('saeyslab/nichenetr')" -e "library('nichenetr')"
 RUN Rscript -e "remotes::install_github('saeyslab/multinichenetr')" -e "library('multinichenetr')"
-RUN Rscript -e "remotes::install_github('davidsjoberg/ggsankey')" -e "library('ggsankey')"
+
+# Install R packages
+RUN Rscript -e "install.packages('Signac')" -e "library('Signac')"
 
 # Install R packages
 RUN Rscript -e "remotes::install_github('Nanostring-Biostats/CosMx-Analysis-Scratch-Space', subdir = '_code/smiDE')" -e "library('smiDE')"
