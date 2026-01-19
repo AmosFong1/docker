@@ -44,4 +44,8 @@ RUN pip install cupy-cuda12x==13.4.1
 RUN pip install polars-lts-cpu==1.30.0
 RUN pip install ema-pytorch==0.7.7
 RUN pip install numba==0.61.2
-RUN pip install celltypist==1.7.1
+
+# Install python packages
+RUN git clone https://github.com/buenrostrolab/scPrinter && \
+    cd scPrinter && \
+    pip install ./
