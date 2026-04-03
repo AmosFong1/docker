@@ -8,6 +8,9 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Install cargo
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
+
 # Add snakemake environment variables
 ENV XDG_CACHE_HOME=/tmp
 

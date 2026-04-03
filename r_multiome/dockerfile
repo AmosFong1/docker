@@ -44,7 +44,6 @@ RUN Rscript -e "BiocManager::install('infercnv')" -e "library('infercnv')"
 RUN Rscript -e "BiocManager::install('motifmatchr')" -e "library('motifmatchr')"
 RUN Rscript -e "BiocManager::install('slingshot')" -e "library('slingshot')"
 RUN Rscript -e "BiocManager::install('tradeSeq')" -e "library('tradeSeq')"
-RUN Rscript -e "BiocManager::install('ggtree')" -e "library('ggtree')"
 RUN Rscript -e "BiocManager::install('chromVAR')" -e "library('chromVAR')"
 RUN Rscript -e "BiocManager::install('org.Hs.eg.db')" -e "library('org.Hs.eg.db')"
 RUN Rscript -e "BiocManager::install('ensembldb')" -e "library('ensembldb')"
@@ -58,16 +57,17 @@ RUN Rscript -e "BiocManager::install('biovizBase')" -e "library('biovizBase')"
 RUN Rscript -e "BiocManager::install('AnnotationHub')" -e "library('AnnotationHub')"
 
 # Install R packages
+RUN Rscript -e "install.packages('Signac')" -e "library('Signac')"
+
+# Install R packages
 RUN Rscript -e "remotes::install_github('immunogenomics/presto')" -e "library('presto')"
 RUN Rscript -e "remotes::install_github('GreenleafLab/chromVARmotifs')" -e "library('chromVARmotifs')"
 RUN Rscript -e "remotes::install_github('satijalab/seurat-wrappers')"
 RUN Rscript -e "remotes::install_github('mojaveazure/seurat-disk')"
 RUN Rscript -e "remotes::install_github('jinworks/CellChat')" -e "library('CellChat')"
-RUN Rscript -e "remotes::install_github('saeyslab/nichenetr')" -e "library('nichenetr')"
-RUN Rscript -e "remotes::install_github('saeyslab/multinichenetr')" -e "library('multinichenetr')"
-
-# Install R packages
-RUN Rscript -e "install.packages('Signac')" -e "library('Signac')"
+RUN Rscript -e "remotes::install_github('Genentech/gneSeqCOO')" -e "library('gneSeqCOO')"
+RUN Rscript -e "remotes::install_github('Green-Lab-MDACC/LymphoMapR')" -e "library('LymphoMapR')"
+RUN Rscript -e "remotes::install_github('krassowski/complex-upset')" -e "library('ComplexUpset')"
 
 # Clear cache
 RUN apt-get clean \
