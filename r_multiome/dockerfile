@@ -58,6 +58,8 @@ RUN Rscript -e "BiocManager::install('AnnotationHub')" -e "library('AnnotationHu
 
 # Install R packages
 RUN Rscript -e "install.packages('Signac')" -e "library('Signac')"
+RUN Rscript -e "install.packages('sf')" -e "library('sf')"
+RUN Rscript -e "install.packages('ggplotify')" -e "library('ggplotify')"
 
 # Install R packages
 RUN Rscript -e "remotes::install_github('immunogenomics/presto')" -e "library('presto')"
@@ -67,7 +69,6 @@ RUN Rscript -e "remotes::install_github('mojaveazure/seurat-disk')"
 RUN Rscript -e "remotes::install_github('jinworks/CellChat')" -e "library('CellChat')"
 RUN Rscript -e "remotes::install_github('Genentech/gneSeqCOO')" -e "library('gneSeqCOO')"
 RUN Rscript -e "remotes::install_github('Green-Lab-MDACC/LymphoMapR')" -e "library('LymphoMapR')"
-RUN Rscript -e "remotes::install_github('krassowski/complex-upset')" -e "library('ComplexUpset')"
 
 # Clear cache
 RUN apt-get clean \
